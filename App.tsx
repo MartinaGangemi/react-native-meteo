@@ -9,6 +9,7 @@
  */
 
 import {StyleSheet, View} from 'react-native';
+import {useState, useEffect} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import TopButtons from './Components/TopButtons';
@@ -17,7 +18,24 @@ import TimeAndLocation from './Components/TimeAndLocation';
 import Details from './Components/Details';
 import DailyForecast from './Components/DailyForecast';
 
+import getFormattedWeatherData from './Services/WeatherServices';
+
 const App = () => {
+  const [query, setQuery] = useState({q: 'berlin'});
+  const units = 'metric';
+  const [weather, setWeather] = useState(null);
+
+  // useEffect(() => {
+  //   const fetchWeather = async () => {
+  //     await getFormattedWeatherData({...query, units}).then(data => {
+  //       setWeather(data);
+  //     });
+  //     console.log('aaa');
+  //   };
+
+  //   fetchWeather();
+  // }, [query, units]);
+
   return (
     <LinearGradient
       colors={['#0066ff', '#99ccff']}

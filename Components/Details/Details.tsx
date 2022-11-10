@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, StyleSheet, View, Image} from 'react-native';
 import {Flex} from 'antd-mobile-rn';
 
+import globalStyles from '../globalStyles';
 const Details = () => {
   return (
     <View style={{marginTop: 15, alignItems: 'center'}}>
@@ -17,33 +18,33 @@ const Details = () => {
           <Text style={{color: 'white', fontSize: 30}}> 26°</Text>
         </Flex.Item>
         <Flex.Item style={{alignItems: 'center'}}>
-          <Text style={{color: 'white', fontSize: 18}}>Percepite</Text>
-          <Text style={{color: 'white', fontSize: 18}}>Umidità</Text>
-          <Text style={{color: 'white', fontSize: 18}}>Vento</Text>
+          <Text style={globalStyles.textWhite}>Percepite</Text>
+          <Text style={globalStyles.textWhite}>Umidità</Text>
+          <Text style={globalStyles.textWhite}>Vento</Text>
         </Flex.Item>
       </Flex>
 
       <Flex style={{marginTop: 15}}>
         <Flex.Item>
-          <Text style={{color: 'white', fontSize: 18}}>Rise:</Text>
+          <Text style={globalStyles.textWhite}>Rise:</Text>
         </Flex.Item>
         <Flex.Item>
-          <Text style={{color: 'white', fontSize: 18}}>|</Text>
+          <Text style={globalStyles.textWhite}>|</Text>
         </Flex.Item>
         <Flex.Item>
-          <Text style={{color: 'white', fontSize: 18}}>Set</Text>
+          <Text style={globalStyles.textWhite}>Set</Text>
         </Flex.Item>
         <Flex.Item>
-          <Text style={{color: 'white', fontSize: 18}}>|</Text>
+          <Text style={globalStyles.textWhite}>|</Text>
         </Flex.Item>
         <Flex.Item>
-          <Text style={{color: 'white', fontSize: 18}}>Max:</Text>
+          <Text style={globalStyles.textWhite}>Max:</Text>
         </Flex.Item>
         <Flex.Item>
-          <Text style={{color: 'white', fontSize: 18}}>|</Text>
+          <Text style={globalStyles.textWhite}>|</Text>
         </Flex.Item>
         <Flex.Item>
-          <Text style={{color: 'white', fontSize: 18}}>Min:</Text>
+          <Text style={globalStyles.textWhite}>Min:</Text>
         </Flex.Item>
       </Flex>
     </View>
