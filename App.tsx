@@ -8,12 +8,12 @@
  * @format
  */
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import {useState, useEffect} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import TopButtons from './Components/TopButtons';
-import Input from './Components/Input';
+import InputComponent from './Components/InputComponent';
 import TimeAndLocation from './Components/TimeAndLocation';
 import Details from './Components/Details';
 import DailyForecast from './Components/DailyForecast';
@@ -21,20 +21,30 @@ import DailyForecast from './Components/DailyForecast';
 import getFormattedWeatherData from './Services/WeatherServices';
 
 const App = () => {
-  const [query, setQuery] = useState({q: 'berlin'});
-  const units = 'metric';
-  const [weather, setWeather] = useState(null);
+  const [query, setQuery] = useState('berlin');
+  type Weather = {
+    title: string;
+    weather: string;
+    temp: number;
+    icons: string;
+  };
+  const [weather, setWeather] = useState<Weather>({
+    title: '',
+    weather: '',
+    temp: 0,
+    icons: '',
+  });
 
-  // useEffect(() => {
-  //   const fetchWeather = async () => {
-  //     await getFormattedWeatherData({...query, units}).then(data => {
-  //       setWeather(data);
-  //     });
-  //     console.log('aaa');
-  //   };
+  useEffect(() => {
+    const fetchWeather = async () => {
+      const data = await getFormattedWeatherData(query).then(data => {
+        setWeather(data);
+        console.log(weather);
+      });
+    };
 
-  //   fetchWeather();
-  // }, [query, units]);
+    fetchWeather();
+  }, [query]);
 
   return (
     <LinearGradient
@@ -42,10 +52,15 @@ const App = () => {
       style={styles.linearGradient}>
       <View>
         <TopButtons></TopButtons>
-        <Input></Input>
-        <TimeAndLocation></TimeAndLocation>
-        <Details></Details>
-        <DailyForecast></DailyForecast>
+
+        <InputComponent></InputComponent>
+        {weather && (
+          <View>
+            <TimeAndLocation weather={weather}></TimeAndLocation>
+            <Details></Details>
+            <DailyForecast></DailyForecast>
+          </View>
+        )}
       </View>
     </LinearGradient>
   );

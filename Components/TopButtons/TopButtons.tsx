@@ -4,8 +4,8 @@ import {Button, Flex} from 'antd-mobile-rn';
 
 const TopButtons = () => {
   const cities = ['Torino', 'Sidney', 'Tokyo', 'Paris'];
-  const cityMap = cities.map(city => (
-    <View style={{padding: 2}}>
+  const cityMap = cities.map((city, i) => (
+    <View key={i} style={{padding: 2}}>
       <Button type="primary">
         <Text style={{textTransform: 'uppercase'}}>{city}</Text>
       </Button>

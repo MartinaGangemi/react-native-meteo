@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Flex, InputItem} from 'antd-mobile-rn';
 
-const Input = () => {
+const InputComponent = () => {
   const [city, setCity] = useState('');
 
   return (
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Input;
+export default InputComponent;
