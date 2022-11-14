@@ -49,11 +49,11 @@ type Data = {
   list: any[];
   dt: number;
   title: string;
-  description: string;
+  weather: string;
   icon: string;
   temp: number;
 };
-const formatForecastWeather = (data: Data) => {
+const formatForecastWeather = (data: Data): any => {
   return data.list
     .map(d => {
       return {

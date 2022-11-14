@@ -21,23 +21,13 @@ import DailyForecast from './Components/DailyForecast';
 import getFormattedWeatherData from './Services/WeatherServices';
 
 const App = () => {
-  const [query, setQuery] = useState('berlin');
-  type Weather = {
-    title: string;
-    weather: string;
-    temp: number;
-    icons: string;
-  };
-  const [weather, setWeather] = useState<Weather>({
-    title: '',
-    weather: '',
-    temp: 0,
-    icons: '',
-  });
+  const [query, setQuery] = useState<string>('london');
+
+  const [weather, setWeather] = useState<any[] | null>(null);
 
   useEffect(() => {
     const fetchWeather = async () => {
-      const data = await getFormattedWeatherData(query).then(data => {
+      await getFormattedWeatherData(query).then(data => {
         setWeather(data);
         console.log(weather);
       });
@@ -46,19 +36,25 @@ const App = () => {
     fetchWeather();
   }, [query]);
 
+  // const fetchWeather = async () => {
+  //   const data = await getFormattedWeatherData('berlin');
+  //   console.log(data);
+  // };
+
+  // fetchWeather();
+
   return (
     <LinearGradient
       colors={['#0066ff', '#99ccff']}
       style={styles.linearGradient}>
       <View>
         <TopButtons></TopButtons>
-
-        <InputComponent></InputComponent>
+        <InputComponent query={query} setQuery={setQuery}></InputComponent>
         {weather && (
           <View>
-            <TimeAndLocation weather={weather}></TimeAndLocation>
+            <TimeAndLocation></TimeAndLocation>
             <Details></Details>
-            <DailyForecast></DailyForecast>
+            <DailyForecast weather={weather}></DailyForecast>
           </View>
         )}
       </View>

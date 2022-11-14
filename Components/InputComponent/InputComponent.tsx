@@ -2,9 +2,19 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Flex, InputItem} from 'antd-mobile-rn';
 
-const InputComponent = () => {
+interface Props {
+  setQuery: string;
+}
+
+const InputComponent = ({setQuery}: Props) => {
   const [city, setCity] = useState('');
 
+  const handleSearchClick = e => {
+    if (city !== '') {
+      setQuery({q: city});
+      setCity(' ');
+    }
+  };
   return (
     <View style={{flexDirection: 'row', marginTop: 15}}>
       <InputItem

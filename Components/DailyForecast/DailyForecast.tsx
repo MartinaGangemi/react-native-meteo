@@ -4,61 +4,28 @@ import {Flex} from 'antd-mobile-rn';
 
 import globalStyles from '../globalStyles';
 
-const DailyForecast = () => {
+interface Props {
+  weather: any;
+}
+
+const DailyForecast = ({weather}: Props) => {
   return (
     <View style={{marginTop: 15}}>
       <Text style={styles.whiteTitle}>Daily Forecast</Text>
       <Flex>
-        <Flex.Item style={{alignItems: 'center'}}>
-          <Text style={globalStyles.textWhite}>Mon</Text>
-          <Image
-            style={styles.icon}
-            source={{
-              uri: 'http://openweathermap.org/img/wn/01d@2x.png',
-            }}
-          />
-          <Text style={globalStyles.textWhite}>35°</Text>
-        </Flex.Item>
-        <Flex.Item style={{alignItems: 'center'}}>
-          <Text style={globalStyles.textWhite}>Mon</Text>
-          <Image
-            style={styles.icon}
-            source={{
-              uri: 'http://openweathermap.org/img/wn/01d@2x.png',
-            }}
-          />
-          <Text style={globalStyles.textWhite}>35°</Text>
-        </Flex.Item>
-        <Flex.Item style={{alignItems: 'center'}}>
-          <Text style={globalStyles.textWhite}>Mon</Text>
-          <Image
-            style={styles.icon}
-            source={{
-              uri: 'http://openweathermap.org/img/wn/01d@2x.png',
-            }}
-          />
-          <Text style={globalStyles.textWhite}>35°</Text>
-        </Flex.Item>
-        <Flex.Item style={{alignItems: 'center'}}>
-          <Text style={globalStyles.textWhite}>Mon</Text>
-          <Image
-            style={styles.icon}
-            source={{
-              uri: 'http://openweathermap.org/img/wn/01d@2x.png',
-            }}
-          />
-          <Text style={globalStyles.textWhite}>35°</Text>
-        </Flex.Item>
-        <Flex.Item style={{alignItems: 'center'}}>
-          <Text style={globalStyles.textWhite}>Mon</Text>
-          <Image
-            style={styles.icon}
-            source={{
-              uri: 'http://openweathermap.org/img/wn/01d@2x.png',
-            }}
-          />
-          <Text style={globalStyles.textWhite}>35°</Text>
-        </Flex.Item>
+        {weather.map((item: any, i: number) => (
+          <Flex.Item key={i} style={{alignItems: 'center'}}>
+            <Text style={globalStyles.textWhite}>{item.title}</Text>
+            <Image
+              style={styles.icon}
+              source={{
+                uri:
+                  'http://openweathermap.org/img/wn/' + item.icon + '@2x.png',
+              }}
+            />
+            <Text style={globalStyles.textWhite}>{item.temp}</Text>
+          </Flex.Item>
+        ))}
       </Flex>
     </View>
   );
