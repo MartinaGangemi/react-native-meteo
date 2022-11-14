@@ -23,7 +23,7 @@ const DailyForecast = ({weather}: Props) => {
                   'http://openweathermap.org/img/wn/' + item.icon + '@2x.png',
               }}
             />
-            <Text style={globalStyles.textWhite}>{item.temp}</Text>
+            <Text style={globalStyles.textWhite}>{item.temp.toFixed()}°</Text>
           </Flex.Item>
         ))}
       </Flex>

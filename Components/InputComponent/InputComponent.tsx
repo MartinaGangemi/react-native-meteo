@@ -1,34 +1,35 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Flex, InputItem} from 'antd-mobile-rn';
+import {log} from 'console';
 
 interface Props {
-  setQuery: string;
+  setQuery: any;
 }
 
 const InputComponent = ({setQuery}: Props) => {
   const [city, setCity] = useState('');
 
-  const handleSearchClick = e => {
+  const onChangeSetHandler = (city: string) => {
+    setCity(city);
+  };
+
+  const clicca = (): any => {
     if (city !== '') {
-      setQuery({q: city});
-      setCity(' ');
+      setQuery(city);
+      //setCity(' ');
     }
   };
+
   return (
     <View style={{flexDirection: 'row', marginTop: 15}}>
       <InputItem
         style={styles.input}
         value={city}
-        onChange={text => console.log(text)}
+        onChange={onChangeSetHandler}
         placeholder="Search for cities..."
       />
-      <Button
-        style={styles.button}
-        onPress={() => {
-          console.log('hai cliccato');
-        }}
-        type="primary">
+      <Button style={styles.button} onClick={clicca} type="primary">
         clicca
       </Button>
     </View>

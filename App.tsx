@@ -49,7 +49,7 @@ const App = () => {
       style={styles.linearGradient}>
       <View>
         <TopButtons></TopButtons>
-        <InputComponent query={query} setQuery={setQuery}></InputComponent>
+        <InputComponent setQuery={setQuery}></InputComponent>
         {weather && (
           <View>
             <TimeAndLocation></TimeAndLocation>

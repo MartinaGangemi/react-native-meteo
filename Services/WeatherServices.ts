@@ -36,7 +36,7 @@ const getFormattedWeatherData = async (q: string) => {
 
   const {lat, lon} = formattedCurrentWeather;
 
-  const url = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+  const url = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
   console.log(url);
   return fetch(url)
     .then(response => response.json())
