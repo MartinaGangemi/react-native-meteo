@@ -49,7 +49,7 @@ const App = () => {
       colors={['#0066ff', '#99ccff']}
       style={styles.linearGradient}>
       <View>
-        <TopButtons></TopButtons>
+        <TopButtons setQuery={setQuery}></TopButtons>
 
         <InputComponent setQuery={setQuery}></InputComponent>
         {weather && (

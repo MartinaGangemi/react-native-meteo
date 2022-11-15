@@ -1,23 +1,19 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, Flex, InputItem} from 'antd-mobile-rn';
-import {log} from 'console';
+import {StyleSheet, View, Keyboard} from 'react-native';
+import {Button, InputItem} from 'antd-mobile-rn';
 
-interface Props {
-  setQuery: any;
-}
-
-const InputComponent = ({setQuery}: Props) => {
+const InputComponent = ({setQuery}: any) => {
   const [city, setCity] = useState('');
 
   const onChangeSetHandler = (city: string) => {
     setCity(city);
   };
 
-  const clicca = (): any => {
+  const searchCities = (): any => {
     if (city !== '') {
       setQuery(city);
       setCity(' ');
+      Keyboard.dismiss();
     }
   };
 
@@ -27,10 +23,12 @@ const InputComponent = ({setQuery}: Props) => {
         style={styles.input}
         value={city}
         onChange={onChangeSetHandler}
+        onSubmitEditing={searchCities}
+        returnKeyType="search"
         placeholder="Search for cities..."
       />
-      <Button style={styles.button} onClick={clicca} type="primary">
-        clicca
+      <Button style={styles.button} onClick={searchCities} type="primary">
+        Search
       </Button>
     </View>
   );
@@ -46,11 +44,11 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 5,
     fontSize: 12,
-    width: '75%',
+    width: '70%',
   },
   button: {
     height: 50,
-    width: '22%',
+    width: '27%',
   },
 });
 
