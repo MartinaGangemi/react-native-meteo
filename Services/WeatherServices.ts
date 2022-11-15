@@ -6,7 +6,7 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const API_KEY = 'f76531c607ada2a619e33269a7bf007f';
 
 const getWeatherData = (q: string) => {
-  const url = `${BASE_URL}/weather?q=${q}&appid=${API_KEY}`;
+  const url = `${BASE_URL}/weather?q=${q}&appid=${API_KEY}&units=metric`;
   return fetch(url)
     .then(response => response.json())
     .then(data => data)
@@ -90,3 +90,4 @@ const formatToLocalTime = (secs: number, format = 'ccc') =>
   DateTime.fromSeconds(secs).toFormat(format);
 
 export default getFormattedWeatherData;
+export {formatToLocalTime};

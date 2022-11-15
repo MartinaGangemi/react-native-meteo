@@ -10,7 +10,7 @@ interface Props {
 
 const DailyForecast = ({weather}: Props) => {
   return (
-    <View style={{marginTop: 15}}>
+    <View style={{marginTop: 25}}>
       <Text style={styles.whiteTitle}>Daily Forecast</Text>
       <Flex>
         {weather.map((item: any, i: number) => (
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   whiteTitle: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 22,
     marginTop: 20,
     marginBottom: 20,
     textTransform: 'uppercase',

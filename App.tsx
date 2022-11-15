@@ -50,10 +50,11 @@ const App = () => {
       style={styles.linearGradient}>
       <View>
         <TopButtons></TopButtons>
+
         <InputComponent setQuery={setQuery}></InputComponent>
         {weather && (
           <View>
-            <TimeAndLocation></TimeAndLocation>
+            <TimeAndLocation weather={weather}></TimeAndLocation>
             <Details weather={weather}></Details>
             <DailyForecast weather={weather.dailyForecast}></DailyForecast>
           </View>
@@ -66,7 +67,7 @@ const App = () => {
 const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
-    padding: 5,
+    padding: 7,
   },
 });
 

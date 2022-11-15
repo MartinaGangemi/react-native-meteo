@@ -1,10 +1,15 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-const TimeAndLocation = () => {
+interface Props {
+  weather: any;
+}
+const TimeAndLocation = ({weather}: Props) => {
   return (
-    <View style={{marginTop: 15, alignItems: 'center'}}>
+    <View style={{marginTop: 25, alignItems: 'center'}}>
       <Text style={styles.todayText}>Today</Text>
-      <Text style={styles.locationText}>Luogo</Text>
+      <Text style={styles.locationText}>
+        {weather.name}, {weather.country}
+      </Text>
     </View>
   );
 };

@@ -14,6 +14,4 @@ const TopButtons = () => {
   return <Flex wrap="wrap">{cityMap}</Flex>;
 };
 
-const styles = StyleSheet.create({});
-
 export default TopButtons;
