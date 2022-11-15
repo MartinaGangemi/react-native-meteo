@@ -1,4 +1,6 @@
+import {log} from 'console';
 import {DateTime} from 'luxon';
+import {mainModule} from 'process';
 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const API_KEY = 'f76531c607ada2a619e33269a7bf007f';
@@ -14,18 +16,31 @@ const getWeatherData = (q: string) => {
 const deconstrouctWeatherData = (data: {coord: {lat: number; lon: number}}) => {
   const {
     coord: {lat, lon},
-    // main: {temp, feels_like, temp_min, temp_max, humidity},
-    // name,
-    // dt,
-    // sys: {country, sunrise, sunset},
-    // weather,
-    // wind: {speed},
+    main: {temp, feels_like, temp_min, temp_max, humidity},
+    name,
+    dt,
+    sys: {country, sunrise, sunset},
+    weather,
+    wind: {speed},
   } = data;
 
-  // const {main: description, icon} = weather[0];
+  const {main: description, icon} = weather[0];
   return {
     lat,
     lon,
+    temp,
+    feels_like,
+    temp_min,
+    temp_max,
+    humidity,
+    name,
+    dt,
+    country,
+    sunrise,
+    sunset,
+    description,
+    icon,
+    speed,
   };
 };
 
@@ -37,12 +52,13 @@ const getFormattedWeatherData = async (q: string) => {
   const {lat, lon} = formattedCurrentWeather;
 
   const url = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-  console.log(url);
-  return fetch(url)
+
+  const dailyForecast = await fetch(url)
     .then(response => response.json())
-    .then(data => data)
-    .then(formatForecastWeather)
-    .catch(err => console.log('Fetch problem' + err.message));
+    .then(data => (data = data))
+    .then(formatForecastWeather);
+
+  return {...formattedCurrentWeather, dailyForecast};
 };
 
 type Data = {
@@ -67,7 +83,7 @@ const formatForecastWeather = (data: Data): any => {
       (value, i, self) =>
         i === self.findIndex(day => day.title === value.title),
     )
-    .slice(0, 6);
+    .slice(1, 6);
 };
 
 const formatToLocalTime = (secs: number, format = 'ccc') =>

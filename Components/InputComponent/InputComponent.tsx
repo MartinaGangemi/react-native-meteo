@@ -17,7 +17,7 @@ const InputComponent = ({setQuery}: Props) => {
   const clicca = (): any => {
     if (city !== '') {
       setQuery(city);
-      //setCity(' ');
+      setCity(' ');
     }
   };
 
