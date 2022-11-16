@@ -19,56 +19,50 @@ import Details from './Components/Details';
 import DailyForecast from './Components/DailyForecast';
 
 import getFormattedWeatherData from './Services/WeatherServices';
-
+import {variables} from './Components/variables';
 const App = () => {
-  const [query, setQuery] = useState<string>('london');
+    const [query, setQuery] = useState<string>('london');
 
-  const [weather, setWeather] = useState<any | null>(null);
+    const [weather, setWeather] = useState<any | null>(null);
 
-  useEffect(() => {
-    const fetchWeather = async () => {
-      await getFormattedWeatherData(query).then(data => {
-        setWeather(data);
+    useEffect(() => {
+        const fetchWeather = async () => {
+            await getFormattedWeatherData(query).then((data) => {
+                setWeather(data);
 
-        console.log(weather);
-      });
-    };
+                console.log(weather);
+            });
+        };
 
-    fetchWeather();
-  }, [query]);
+        fetchWeather();
+    }, [query]);
 
-  // const fetchWeather = async () => {
-  //   const data = await getFormattedWeatherData('berlin');
-  //   console.log(data);
-  // };
-
-  // fetchWeather();
-
-  return (
-    <LinearGradient
-      colors={['#0066ff', '#99ccff']}
-      style={styles.linearGradient}>
-      <View>
-        <TopButtons setQuery={setQuery}></TopButtons>
-
-        <InputComponent setQuery={setQuery}></InputComponent>
-        {weather && (
-          <View>
-            <TimeAndLocation weather={weather}></TimeAndLocation>
-            <Details weather={weather}></Details>
-            <DailyForecast weather={weather.dailyForecast}></DailyForecast>
-          </View>
-        )}
-      </View>
-    </LinearGradient>
-  );
+    return (
+        <LinearGradient
+            colors={[
+                variables.primaryBackground,
+                variables.secondaryBackground,
+            ]}
+            style={styles.linearGradient}>
+            <TopButtons setQuery={setQuery}></TopButtons>
+            <InputComponent setQuery={setQuery}></InputComponent>
+            {weather && (
+                <View>
+                    <TimeAndLocation weather={weather}></TimeAndLocation>
+                    <Details weather={weather}></Details>
+                    <DailyForecast
+                        weather={weather.dailyForecast}></DailyForecast>
+                </View>
+            )}
+        </LinearGradient>
+    );
 };
 
 const styles = StyleSheet.create({
-  linearGradient: {
-    flex: 1,
-    padding: 7,
-  },
+    linearGradient: {
+        flex: 1,
+        padding: 7,
+    },
 });
 
 export default App;

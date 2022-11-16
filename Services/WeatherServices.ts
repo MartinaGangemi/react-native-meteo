@@ -1,6 +1,5 @@
 import {log} from 'console';
 import {DateTime} from 'luxon';
-import {mainModule} from 'process';
 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const API_KEY = 'f76531c607ada2a619e33269a7bf007f';
@@ -13,7 +12,22 @@ const getWeatherData = (q: string) => {
     .catch(err => console.log('Fetch problem' + err.message));
 };
 
-const deconstrouctWeatherData = (data: {coord: {lat: number; lon: number}}) => {
+type WeatherData = {
+  coord: {lat: number; lon: number};
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    humidity: number;
+  };
+  name: string;
+  dt: number;
+  sys: {country: string; sunrise: number; sunset: number};
+  weather: string;
+  wind: {speed: number};
+};
+const deconstrouctWeatherData = (data: WeatherData) => {
   const {
     coord: {lat, lon},
     main: {temp, feels_like, temp_min, temp_max, humidity},
@@ -24,7 +38,7 @@ const deconstrouctWeatherData = (data: {coord: {lat: number; lon: number}}) => {
     wind: {speed},
   } = data;
 
-  const {main: description, icon} = weather[0];
+  const {main: description, icon}: any = weather[0];
   return {
     lat,
     lon,
